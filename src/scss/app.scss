@@ -1,0 +1,34 @@
+.dialog {
+  position: absolute;
+  z-index: 2000;
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
+
+.dialog__container {
+  position: fixed;
+  top: 50%;
+ left: 50%;
+ padding: 40px;
+ box-sizing: border-box;
+ transform: translate3d(-50%,-50%,0);
+ background-color: #fff;
+}
+
+.overlay {
+  position: absolute;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.25);
+  display: none;
+
+  &.active {
+    display: block;
+  }
+}
