@@ -305,7 +305,7 @@ var TokenDetailView = /** @class */ (function () {
         this.name.setAttribute('data-tokenid', this.token.id);
         this.unit.innerHTML = this.token.unit;
         this.description.innerHTML = this.token.description;
-        this.favorite.innerHTML = (this.token.favorite) ? '★' : '☆';
+        this.favorite.innerHTML = (this.token.favorite) ? '&#9829;' : '';
         this.favoriteTrigger.setAttribute('data-tokenid', this.token.id);
     };
     return TokenDetailView;
