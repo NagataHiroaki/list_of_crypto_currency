@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,185 +70,11 @@
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var TokenListView_1 = __webpack_require__(4);
-var TokenDetailView_1 = __webpack_require__(5);
-var TokenRegistView_1 = __webpack_require__(8);
-var DialogView_1 = __webpack_require__(9);
-var OverlayView_1 = __webpack_require__(10);
-var AppController_1 = __webpack_require__(6);
-TokenListView_1.default;
-TokenDetailView_1.default;
-TokenRegistView_1.default;
-DialogView_1.default;
-OverlayView_1.default;
-var listEvent = {
-    event: AppController_1.responseEvent.viewList
-};
-var DetailEvent = {
-    event: AppController_1.requestEvent.getTokenInfo,
-    tokenID: 0
-};
-AppController_1.default.response(listEvent);
-AppController_1.default.request(DetailEvent);
-
-
-/***/ }),
-/* 1 */,
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-exports.default = [
-    {
-        "id": 0,
-        "name": "Bitcoin",
-        "unit": "BTC",
-        "description": "Bitcoin説明文",
-        "favorite": false
-    },
-    {
-        "id": 1,
-        "name": "Ethereum",
-        "unit": "ETH",
-        "description": "Ethereumの説明文",
-        "favorite": false
-    },
-    {
-        "id": 2,
-        "name": "Ethereum Classic",
-        "unit": "ETC",
-        "description": "Ethereum Classicの説明文",
-        "favorite": false
-    },
-    {
-        "id": 3,
-        "name": "Lisk",
-        "unit": "LSK",
-        "description": "Liskの説明文",
-        "favorite": false
-    },
-    {
-        "id": 4,
-        "name": "Factom",
-        "unit": "FCT",
-        "description": "Factomの説明文",
-        "favorite": false
-    },
-    {
-        "id": 5,
-        "name": "Monero",
-        "unit": "XMR",
-        "description": "Moneroの説明文",
-        "favorite": false
-    },
-    {
-        "id": 6,
-        "name": "Augur",
-        "unit": "REP",
-        "description": "Augurの説明文",
-        "favorite": false
-    },
-    {
-        "id": 7,
-        "name": "Ripple",
-        "unit": "XRP",
-        "description": "Rippleの説明文",
-        "favorite": false
-    }
-];
-
-
-/***/ }),
-/* 3 */,
-/* 4 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var tokenList_1 = __webpack_require__(2);
-var AppController_1 = __webpack_require__(6);
-var TokenListView = /** @class */ (function () {
-    function TokenListView() {
-        this.list = document.getElementById('js-token-list');
-        this.data = tokenList_1.default;
-        this.init();
-    }
-    TokenListView.prototype.init = function () {
-        this.render();
-        this.setItem();
-    };
-    TokenListView.prototype.setItem = function () {
-        this.itemArray = document.querySelectorAll('.js-token-list-item');
-        var _loop_1 = function (i) {
-            var item = document.querySelector('.js-token-list-item:nth-child(' + (i + 1) + ')');
-            item.addEventListener('click', function () {
-                var tokenID = Number(item.getAttribute('data-tokenid'));
-                var e = {
-                    event: AppController_1.requestEvent.getTokenInfo,
-                    tokenID: tokenID
-                };
-                AppController_1.default.request(e);
-            });
-        };
-        for (var i = 0; i < this.itemArray.length; ++i) {
-            _loop_1(i);
-        }
-    };
-    TokenListView.prototype.render = function () {
-        var res = "";
-        for (var i in this.data) {
-            res += '<li class="mdc-list-item js-token-list-item" data-tokenid="' + this.data[i].id + '">' + this.data[i].unit + '</li>';
-        }
-        this.list.innerHTML = res;
-    };
-    return TokenListView;
-}());
-exports.default = new TokenListView();
-
-
-/***/ }),
-/* 5 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var TokenDetailView = /** @class */ (function () {
-    function TokenDetailView() {
-        this.name = document.getElementById('js-token-name');
-        this.unit = document.getElementById('js-token-unit');
-        this.description = document.getElementById('js-token-description');
-        // this.render(2); //test code
-    }
-    TokenDetailView.prototype.render = function (token) {
-        /*
-         * 型エラーあり
-         */
-        this.name.innerHTML = token.name;
-        this.name.dataset.tokenid = token.id;
-        this.unit.innerHTML = token.unit;
-        this.description.innerHTML = token.description;
-    };
-    return TokenDetailView;
-}());
-exports.default = new TokenDetailView();
-
-
-/***/ }),
-/* 6 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var TokenModel_1 = __webpack_require__(7);
-var TokenDetailView_1 = __webpack_require__(5);
-var OverlayView_1 = __webpack_require__(10);
-var DialogView_1 = __webpack_require__(9);
-var TokenListView_1 = __webpack_require__(4);
+var TokenModel_1 = __webpack_require__(8);
+var TokenDetailView_1 = __webpack_require__(3);
+var OverlayView_1 = __webpack_require__(4);
+var DialogView_1 = __webpack_require__(6);
+var TokenListView_1 = __webpack_require__(1);
 exports.requestEvent = {
     getTokenInfo: "getTokenInfo",
     registToken: "registToken",
@@ -326,14 +152,271 @@ exports.default = new AppController();
 
 
 /***/ }),
-/* 7 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var tokenList_1 = __webpack_require__(2);
-var AppController_1 = __webpack_require__(6);
+var AppController_1 = __webpack_require__(0);
+var TokenListView = /** @class */ (function () {
+    function TokenListView() {
+        this.list = document.getElementById('js-token-list');
+        this.data = tokenList_1.default;
+        this.init();
+    }
+    TokenListView.prototype.init = function () {
+        this.render();
+        this.setItem();
+    };
+    TokenListView.prototype.setItem = function () {
+        this.itemArray = document.querySelectorAll('.js-token-list-item');
+        var _loop_1 = function (i) {
+            var item = document.querySelector('.js-token-list-item:nth-child(' + (i + 1) + ')');
+            item.addEventListener('click', function () {
+                var tokenID = Number(item.getAttribute('data-tokenid'));
+                var e = {
+                    event: AppController_1.requestEvent.getTokenInfo,
+                    tokenID: tokenID
+                };
+                AppController_1.default.request(e);
+            });
+        };
+        for (var i = 0; i < this.itemArray.length; ++i) {
+            _loop_1(i);
+        }
+    };
+    TokenListView.prototype.render = function () {
+        var res = "";
+        for (var i in this.data) {
+            res += '<li class="mdc-list-item js-token-list-item" data-tokenid="' + this.data[i].id + '">' + this.data[i].unit + '</li>';
+        }
+        this.list.innerHTML = res;
+    };
+    return TokenListView;
+}());
+exports.default = new TokenListView();
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.default = [
+    {
+        "id": 0,
+        "name": "Bitcoin",
+        "unit": "BTC",
+        "description": "Bitcoin説明文",
+        "favorite": false
+    },
+    {
+        "id": 1,
+        "name": "Ethereum",
+        "unit": "ETH",
+        "description": "Ethereumの説明文",
+        "favorite": false
+    },
+    {
+        "id": 2,
+        "name": "Ethereum Classic",
+        "unit": "ETC",
+        "description": "Ethereum Classicの説明文",
+        "favorite": false
+    },
+    {
+        "id": 3,
+        "name": "Lisk",
+        "unit": "LSK",
+        "description": "Liskの説明文",
+        "favorite": false
+    },
+    {
+        "id": 4,
+        "name": "Factom",
+        "unit": "FCT",
+        "description": "Factomの説明文",
+        "favorite": false
+    },
+    {
+        "id": 5,
+        "name": "Monero",
+        "unit": "XMR",
+        "description": "Moneroの説明文",
+        "favorite": false
+    },
+    {
+        "id": 6,
+        "name": "Augur",
+        "unit": "REP",
+        "description": "Augurの説明文",
+        "favorite": false
+    },
+    {
+        "id": 7,
+        "name": "Ripple",
+        "unit": "XRP",
+        "description": "Rippleの説明文",
+        "favorite": false
+    }
+];
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var TokenDetailView = /** @class */ (function () {
+    function TokenDetailView() {
+        this.name = document.getElementById('js-token-name');
+        this.unit = document.getElementById('js-token-unit');
+        this.description = document.getElementById('js-token-description');
+        // this.render(2); //test code
+    }
+    TokenDetailView.prototype.render = function (token) {
+        /*
+         * 型エラーあり
+         */
+        this.name.innerHTML = token.name;
+        this.name.dataset.tokenid = token.id;
+        this.unit.innerHTML = token.unit;
+        this.description.innerHTML = token.description;
+    };
+    return TokenDetailView;
+}());
+exports.default = new TokenDetailView();
+
+
+/***/ }),
+/* 4 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var ToggleElmBaseView_1 = __webpack_require__(5);
+var Overlay = /** @class */ (function (_super) {
+    __extends(Overlay, _super);
+    function Overlay() {
+        var _this = _super.call(this) || this;
+        _this.dialog = document.getElementById('js-overlay');
+        _this.ACTIVE_CLASS = "active";
+        return _this;
+    }
+    return Overlay;
+}(ToggleElmBaseView_1.default));
+exports.default = new Overlay();
+
+
+/***/ }),
+/* 5 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var ToggleElmBaseView = /** @class */ (function () {
+    function ToggleElmBaseView() {
+        this.dialog;
+        this.ACTIVE_CLASS;
+    }
+    ToggleElmBaseView.prototype.open = function () {
+        this.dialog.classList.add(this.ACTIVE_CLASS);
+    };
+    ToggleElmBaseView.prototype.close = function () {
+        this.dialog.classList.remove(this.ACTIVE_CLASS);
+    };
+    return ToggleElmBaseView;
+}());
+exports.default = ToggleElmBaseView;
+
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+var __extends = (this && this.__extends) || (function () {
+    var extendStatics = Object.setPrototypeOf ||
+        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
+        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
+    return function (d, b) {
+        extendStatics(d, b);
+        function __() { this.constructor = d; }
+        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
+    };
+})();
+Object.defineProperty(exports, "__esModule", { value: true });
+var ToggleElmBaseView_1 = __webpack_require__(5);
+var DialogView = /** @class */ (function (_super) {
+    __extends(DialogView, _super);
+    function DialogView() {
+        var _this = _super.call(this) || this;
+        _this.dialog = document.getElementById('js-dialog');
+        _this.ACTIVE_CLASS = "active";
+        return _this;
+    }
+    return DialogView;
+}(ToggleElmBaseView_1.default));
+exports.default = new DialogView();
+
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var TokenListView_1 = __webpack_require__(1);
+var TokenDetailView_1 = __webpack_require__(3);
+var TokenRegistView_1 = __webpack_require__(9);
+var DialogView_1 = __webpack_require__(6);
+var OverlayView_1 = __webpack_require__(4);
+var AppController_1 = __webpack_require__(0);
+TokenListView_1.default;
+TokenDetailView_1.default;
+TokenRegistView_1.default;
+DialogView_1.default;
+OverlayView_1.default;
+var listEvent = {
+    event: AppController_1.responseEvent.viewList
+};
+var DetailEvent = {
+    event: AppController_1.requestEvent.getTokenInfo,
+    tokenID: 0
+};
+AppController_1.default.response(listEvent);
+AppController_1.default.request(DetailEvent);
+
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var tokenList_1 = __webpack_require__(2);
+var AppController_1 = __webpack_require__(0);
 var TokenModel = /** @class */ (function () {
     function TokenModel() {
     }
@@ -391,13 +474,13 @@ exports.default = new TokenModel();
 
 
 /***/ }),
-/* 8 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var AppController_1 = __webpack_require__(6);
+var AppController_1 = __webpack_require__(0);
 var TokenRegistView = /** @class */ (function () {
     function TokenRegistView() {
         this.formOpenTrigger = document.getElementById('js-regist-token-trigger');
@@ -428,91 +511,6 @@ var TokenRegistView = /** @class */ (function () {
     return TokenRegistView;
 }());
 exports.default = new TokenRegistView();
-
-
-/***/ }),
-/* 9 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var ToggleElmBaseView_1 = __webpack_require__(11);
-var DialogView = /** @class */ (function (_super) {
-    __extends(DialogView, _super);
-    function DialogView() {
-        var _this = _super.call(this) || this;
-        _this.dialog = document.getElementById('js-dialog');
-        _this.ACTIVE_CLASS = "active";
-        return _this;
-    }
-    return DialogView;
-}(ToggleElmBaseView_1.default));
-exports.default = new DialogView();
-
-
-/***/ }),
-/* 10 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
-Object.defineProperty(exports, "__esModule", { value: true });
-var ToggleElmBaseView_1 = __webpack_require__(11);
-var Overlay = /** @class */ (function (_super) {
-    __extends(Overlay, _super);
-    function Overlay() {
-        var _this = _super.call(this) || this;
-        _this.dialog = document.getElementById('js-overlay');
-        _this.ACTIVE_CLASS = "active";
-        return _this;
-    }
-    return Overlay;
-}(ToggleElmBaseView_1.default));
-exports.default = new Overlay();
-
-
-/***/ }),
-/* 11 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
-var ToggleElmBaseView = /** @class */ (function () {
-    function ToggleElmBaseView() {
-        this.dialog;
-        this.ACTIVE_CLASS;
-    }
-    ToggleElmBaseView.prototype.open = function () {
-        this.dialog.classList.add(this.ACTIVE_CLASS);
-    };
-    ToggleElmBaseView.prototype.close = function () {
-        this.dialog.classList.remove(this.ACTIVE_CLASS);
-    };
-    return ToggleElmBaseView;
-}());
-exports.default = ToggleElmBaseView;
 
 
 /***/ })
