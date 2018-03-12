@@ -1,9 +1,9 @@
+import AppController, { responseEvent, requestEvent } from "./controller/AppController";
 import TokenListView from "./view/TokenListView";
 import TokenDetailView from "./view/TokenDetailView";
 import TokenRegistView from "./view/TokenRegistView";
 import DialogView from "./view/DialogView";
 import OverlayView from "./view/OverlayView";
-import AppController, { responseEvent, requestEvent } from "./controller/AppController";
 
 
 TokenListView;
@@ -17,10 +17,10 @@ const listEvent = {
 }
 
 const DetailEvent = {
-  event: requestEvent.getTokenInfo,
+  event: responseEvent.viewDetail,
   tokenID: 0
-
 }
 
 AppController.response(listEvent);
-AppController.request(DetailEvent);
+AppController.response(DetailEvent);
+// AppController.request(DetailEvent);

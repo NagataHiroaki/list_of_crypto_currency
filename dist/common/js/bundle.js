@@ -120,6 +120,7 @@ var AppController = /** @class */ (function () {
             //   OverlayView.close();
             //   break;
             case exports.requestEvent.favoriteToken:
+                TokenModel_1.default.favoriteToken(e.tokenID);
                 break;
             default:
                 break;
@@ -273,21 +274,39 @@ exports.default = [
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var AppController_1 = __webpack_require__(0);
+var tokenList_1 = __webpack_require__(2);
 var TokenDetailView = /** @class */ (function () {
     function TokenDetailView() {
         this.name = document.getElementById('js-token-name');
         this.unit = document.getElementById('js-token-unit');
         this.description = document.getElementById('js-token-description');
+        this.favorite = document.getElementById('js-token-favorite');
+        this.favoriteTrigger = document.getElementById('js-token-favorite-trigger');
         // this.render(2); //test code
+        this.init();
     }
+    TokenDetailView.prototype.init = function () {
+        var _this = this;
+        this.favoriteTrigger.addEventListener('click', function () {
+            var e = {
+                event: AppController_1.requestEvent.favoriteToken,
+                tokenID: Number(_this.favoriteTrigger.getAttribute('data-tokenid'))
+            };
+            AppController_1.default.request(e);
+        });
+    };
     TokenDetailView.prototype.render = function (token) {
+        this.token = (token) ? token : tokenList_1.default[0];
         /*
          * 型エラーあり
          */
-        this.name.innerHTML = token.name;
-        this.name.dataset.tokenid = token.id;
-        this.unit.innerHTML = token.unit;
-        this.description.innerHTML = token.description;
+        this.name.innerHTML = this.token.name;
+        this.name.setAttribute('data-tokenid', this.token.id);
+        this.unit.innerHTML = this.token.unit;
+        this.description.innerHTML = this.token.description;
+        this.favorite.innerHTML = (this.token.favorite) ? '★' : '☆';
+        this.favoriteTrigger.setAttribute('data-tokenid', this.token.id);
     };
     return TokenDetailView;
 }());
@@ -386,12 +405,12 @@ exports.default = new DialogView();
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
+var AppController_1 = __webpack_require__(0);
 var TokenListView_1 = __webpack_require__(1);
 var TokenDetailView_1 = __webpack_require__(3);
 var TokenRegistView_1 = __webpack_require__(9);
 var DialogView_1 = __webpack_require__(6);
 var OverlayView_1 = __webpack_require__(4);
-var AppController_1 = __webpack_require__(0);
 TokenListView_1.default;
 TokenDetailView_1.default;
 TokenRegistView_1.default;
@@ -401,11 +420,12 @@ var listEvent = {
     event: AppController_1.responseEvent.viewList
 };
 var DetailEvent = {
-    event: AppController_1.requestEvent.getTokenInfo,
+    event: AppController_1.responseEvent.viewDetail,
     tokenID: 0
 };
 AppController_1.default.response(listEvent);
-AppController_1.default.request(DetailEvent);
+AppController_1.default.response(DetailEvent);
+// AppController.request(DetailEvent);
 
 
 /***/ }),
@@ -467,6 +487,14 @@ var TokenModel = /** @class */ (function () {
         name.value = '';
         unit.value = '';
         description.value = '';
+    };
+    TokenModel.prototype.favoriteToken = function (tokenID) {
+        for (var i in tokenList_1.default) {
+            if (tokenList_1.default[i].id === tokenID) {
+                tokenList_1.default[i].favorite = !tokenList_1.default[i].favorite;
+                this.viewTokenDetail(tokenList_1.default[i]);
+            }
+        }
     };
     return TokenModel;
 }());

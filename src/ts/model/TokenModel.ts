@@ -66,6 +66,16 @@ class TokenModel {
     description.value = '';
 
   }
+
+  favoriteToken(tokenID:Number) {
+    for(let i in tokenList) {
+      if(tokenList[i].id === tokenID) {
+        tokenList[i].favorite = !tokenList[i].favorite;
+
+        this.viewTokenDetail(tokenList[i]);
+      }
+    }
+  }
 }
 
 export default new TokenModel();

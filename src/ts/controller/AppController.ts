@@ -56,6 +56,7 @@ class AppController {
       //   OverlayView.close();
       //   break;
       case requestEvent.favoriteToken:
+        TokenModel.favoriteToken(e.tokenID);
         break;
       default:
         break;
