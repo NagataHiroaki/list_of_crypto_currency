@@ -71,10 +71,10 @@
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var TokenModel_1 = __webpack_require__(8);
-var TokenDetailView_1 = __webpack_require__(3);
-var OverlayView_1 = __webpack_require__(4);
-var DialogView_1 = __webpack_require__(6);
-var TokenListView_1 = __webpack_require__(1);
+var TokenDetailView_1 = __webpack_require__(2);
+var OverlayView_1 = __webpack_require__(3);
+var DialogView_1 = __webpack_require__(5);
+var TokenListView_1 = __webpack_require__(6);
 exports.requestEvent = {
     getTokenInfo: "getTokenInfo",
     registToken: "registToken",
@@ -159,54 +159,6 @@ exports.default = new AppController();
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var tokenList_1 = __webpack_require__(2);
-var AppController_1 = __webpack_require__(0);
-var TokenListView = /** @class */ (function () {
-    function TokenListView() {
-        this.list = document.getElementById('js-token-list');
-        this.data = tokenList_1.default;
-        this.init();
-    }
-    TokenListView.prototype.init = function () {
-        this.render();
-        this.setItem();
-    };
-    TokenListView.prototype.setItem = function () {
-        this.itemArray = document.querySelectorAll('.js-token-list-item');
-        var _loop_1 = function (i) {
-            var item = document.querySelector('.js-token-list-item:nth-child(' + (i + 1) + ')');
-            item.addEventListener('click', function () {
-                var tokenID = Number(item.getAttribute('data-tokenid'));
-                var e = {
-                    event: AppController_1.requestEvent.getTokenInfo,
-                    tokenID: tokenID
-                };
-                AppController_1.default.request(e);
-            });
-        };
-        for (var i = 0; i < this.itemArray.length; ++i) {
-            _loop_1(i);
-        }
-    };
-    TokenListView.prototype.render = function () {
-        var res = "";
-        for (var i in this.data) {
-            res += '<li class="mdc-list-item js-token-list-item" data-tokenid="' + this.data[i].id + '">' + this.data[i].unit + '</li>';
-        }
-        this.list.innerHTML = res;
-    };
-    return TokenListView;
-}());
-exports.default = new TokenListView();
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-Object.defineProperty(exports, "__esModule", { value: true });
 exports.default = [
     {
         "id": 0,
@@ -268,14 +220,14 @@ exports.default = [
 
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var AppController_1 = __webpack_require__(0);
-var tokenList_1 = __webpack_require__(2);
+var tokenList_1 = __webpack_require__(1);
 var TokenDetailView = /** @class */ (function () {
     function TokenDetailView() {
         this.name = document.getElementById('js-token-name');
@@ -298,9 +250,6 @@ var TokenDetailView = /** @class */ (function () {
     };
     TokenDetailView.prototype.render = function (token) {
         this.token = (token) ? token : tokenList_1.default[0];
-        /*
-         * 型エラーあり
-         */
         this.name.innerHTML = this.token.name;
         this.name.setAttribute('data-tokenid', this.token.id);
         this.unit.innerHTML = this.token.unit;
@@ -314,7 +263,7 @@ exports.default = new TokenDetailView();
 
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -330,7 +279,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var ToggleElmBaseView_1 = __webpack_require__(5);
+var ToggleElmBaseView_1 = __webpack_require__(4);
 var Overlay = /** @class */ (function (_super) {
     __extends(Overlay, _super);
     function Overlay() {
@@ -345,7 +294,7 @@ exports.default = new Overlay();
 
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -368,7 +317,7 @@ exports.default = ToggleElmBaseView;
 
 
 /***/ }),
-/* 6 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -384,7 +333,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var ToggleElmBaseView_1 = __webpack_require__(5);
+var ToggleElmBaseView_1 = __webpack_require__(4);
 var DialogView = /** @class */ (function (_super) {
     __extends(DialogView, _super);
     function DialogView() {
@@ -399,6 +348,54 @@ exports.default = new DialogView();
 
 
 /***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", { value: true });
+var tokenList_1 = __webpack_require__(1);
+var AppController_1 = __webpack_require__(0);
+var TokenListView = /** @class */ (function () {
+    function TokenListView() {
+        this.list = document.getElementById('js-token-list');
+        this.data = tokenList_1.default;
+        this.init();
+    }
+    TokenListView.prototype.init = function () {
+        this.render();
+        this.setItem();
+    };
+    TokenListView.prototype.setItem = function () {
+        this.itemArray = document.querySelectorAll('.js-token-list-item');
+        var _loop_1 = function (i) {
+            var item = document.querySelector('.js-token-list-item:nth-child(' + (i + 1) + ')');
+            item.addEventListener('click', function () {
+                var tokenID = Number(item.getAttribute('data-tokenid'));
+                var e = {
+                    event: AppController_1.requestEvent.getTokenInfo,
+                    tokenID: tokenID
+                };
+                AppController_1.default.request(e);
+            });
+        };
+        for (var i = 0; i < this.itemArray.length; ++i) {
+            _loop_1(i);
+        }
+    };
+    TokenListView.prototype.render = function () {
+        var res = "";
+        for (var i in this.data) {
+            res += '<li class="mdc-list-item js-token-list-item" data-tokenid="' + this.data[i].id + '">' + this.data[i].unit + '</li>';
+        }
+        this.list.innerHTML = res;
+    };
+    return TokenListView;
+}());
+exports.default = new TokenListView();
+
+
+/***/ }),
 /* 7 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -406,11 +403,11 @@ exports.default = new DialogView();
 
 Object.defineProperty(exports, "__esModule", { value: true });
 var AppController_1 = __webpack_require__(0);
-var TokenListView_1 = __webpack_require__(1);
-var TokenDetailView_1 = __webpack_require__(3);
+var TokenListView_1 = __webpack_require__(6);
+var TokenDetailView_1 = __webpack_require__(2);
 var TokenRegistView_1 = __webpack_require__(9);
-var DialogView_1 = __webpack_require__(6);
-var OverlayView_1 = __webpack_require__(4);
+var DialogView_1 = __webpack_require__(5);
+var OverlayView_1 = __webpack_require__(3);
 TokenListView_1.default;
 TokenDetailView_1.default;
 TokenRegistView_1.default;
@@ -435,7 +432,7 @@ AppController_1.default.response(DetailEvent);
 "use strict";
 
 Object.defineProperty(exports, "__esModule", { value: true });
-var tokenList_1 = __webpack_require__(2);
+var tokenList_1 = __webpack_require__(1);
 var AppController_1 = __webpack_require__(0);
 var TokenModel = /** @class */ (function () {
     function TokenModel() {

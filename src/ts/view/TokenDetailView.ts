@@ -7,7 +7,7 @@ class TokenDetailView {
   description: Element;
   favorite: Element;
   favoriteTrigger: Element;
-  token:Object
+  token:any
 
   constructor() {
     this.name = document.getElementById('js-token-name');
@@ -35,9 +35,6 @@ class TokenDetailView {
   render(token:Object) {
     this.token = (token)? token: tokenList[0];
 
-    /*
-     * 型エラーあり
-     */
     this.name.innerHTML = this.token.name;
     this.name.setAttribute('data-tokenid',this.token.id);
     this.unit.innerHTML = this.token.unit;
